@@ -4,7 +4,7 @@ Ce projet de recherche est mené au sein du **LIP6 (Sorbonne Université)** dans
 
 ## Contexte
 
-Un Graphe de Connaissances (GC) organise l'information en représentant des entités, leurs attributs et leurs relations sous une forme interconnectée. Ce projet s'appuie sur les LLM pour transformer du texte brut en représentations sémantiques exploitables.
+Un Graphe de Connaissances (GK en anglais) organise l'information en représentant des entités, leurs attributs et leurs relations sous une forme interconnectée. Ce projet s'appuie sur les LLM pour transformer du texte brut en représentations sémantiques exploitables.
 
 ## Objectifs
 
