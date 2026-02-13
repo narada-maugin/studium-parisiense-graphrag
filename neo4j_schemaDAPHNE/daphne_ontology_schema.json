@@ -1,0 +1,444 @@
+{
+    "_comment": "DAPHNE Factoid-Based Prosopographical Ontology for Studium Parisiense",
+    "_version": "1.0",
+    "_description": "Full ontology following the DAPHNE conceptual model. Every assertion about a person is mediated by a Factoid node, enabling provenance tracking, certainty, and multi-source reconciliation.",
+
+    "entities": {
+        "Person": {
+            "description": "A person (physical or moral entity)",
+            "cidoc": "E21_Person / E74_Group",
+            "attributes": {
+                "person_id": "Unique identifier",
+                "shortdesc": "Short description"
+            },
+            "subtypes": {
+                "PhysicalPerson": {
+                    "description": "An individual human being",
+                    "attributes": {
+                        "genre": "Gender (M/F/unknown)"
+                    }
+                },
+                "MoralEntity": {
+                    "description": "A corporate/collective person (e.g. a cathedral chapter acting as a unit)"
+                }
+            }
+        },
+        "Name": {
+            "description": "A name form for a person (main name or variant)",
+            "cidoc": "E41_Appellation",
+            "attributes": {
+                "name_id": "Unique identifier",
+                "completename": "Full name string"
+            }
+        },
+        "GroupP": {
+            "description": "A group of persons: university, college, religious order, nation, etc.",
+            "cidoc": "E74_Group",
+            "attributes": {
+                "group_id": "Unique identifier",
+                "group_descr": "Description of the group"
+            }
+        },
+        "Place": {
+            "description": "A specific location (city, building, etc.)",
+            "cidoc": "E53_Place",
+            "attributes": {
+                "place_id": "Unique identifier",
+                "place_description": "Description or name of the place"
+            }
+        },
+        "Address": {
+            "description": "A postal/physical address associated with a place",
+            "cidoc": "E53_Place",
+            "attributes": {
+                "address_id": "Unique identifier",
+                "address_text": "Full address text"
+            },
+            "_populated": false
+        },
+        "Zone": {
+            "description": "A geographic/administrative zone (diocese, region, country). Hierarchical via PartOf.",
+            "cidoc": "E53_Place",
+            "attributes": {
+                "zone_id": "Unique identifier",
+                "zone_description": "Name or description of the zone"
+            }
+        },
+        "Domain": {
+            "description": "A field of knowledge or discipline (Theology, Arts, Law, Medicine). Hierarchical via PartOf.",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "domain_id": "Unique identifier",
+                "name": "Name of the domain"
+            }
+        },
+        "Source": {
+            "description": "A documentary source (fiche, manuscript, book, archive). Each Studium fiche becomes a Source.",
+            "cidoc": "E31_Document",
+            "attributes": {
+                "source_id": "Unique identifier",
+                "name": "Title or reference of the source",
+                "language": "Language of the source",
+                "reputation": "Reliability assessment"
+            }
+        },
+        "SourceType": {
+            "description": "Type/category of source (fiche, manuscript, chronicle, etc.)",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "sourcetype_id": "Unique identifier",
+                "sourcetypedescription": "Description of the source type"
+            },
+            "_populated": false
+        },
+        "Edition": {
+            "description": "A published edition of a source",
+            "cidoc": "E73_Information_Object",
+            "attributes": {
+                "edition_id": "Unique identifier",
+                "title": "Title of the edition",
+                "notes": "Editorial notes",
+                "problem": "Known issues",
+                "publicationdate": "Date of publication",
+                "editor": "Editor name",
+                "pages": "Page range"
+            },
+            "subtypes": {
+                "Translation": {
+                    "description": "A translated edition",
+                    "attributes": {
+                        "language": "Target language of translation"
+                    }
+                }
+            },
+            "_populated": false
+        },
+        "Factoid": {
+            "description": "A sourced assertion about a person. Central mediating entity of the prosopographical model. Every biographical fact (birth, study, teaching, etc.) is a Factoid linking person, place, time, and source.",
+            "cidoc": "E13_Attribute_Assignment",
+            "attributes": {
+                "factoid_id": "Unique identifier",
+                "certainty": "Degree of certainty (certain, probable, uncertain)",
+                "duration": "Duration of the event/state",
+                "notes": "Additional notes",
+                "description": "Human-readable description of the factoid",
+                "original_text": "Original text from which the factoid was extracted",
+                "problem": "Known issues or ambiguities"
+            }
+        },
+        "FactoidType": {
+            "description": "Type/category of factoid (birth, study, teaching, grade, membership, etc.). Hierarchical via IsTypeOf. Sequenceable via Precedes.",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "factoidtype_id": "Unique identifier",
+                "description": "Description of the factoid type"
+            }
+        },
+        "Role": {
+            "description": "The role a person plays in a factoid (student, teacher, witness, author, etc.)",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "role_id": "Unique identifier",
+                "role_description": "Description of the role"
+            }
+        },
+        "Rank": {
+            "description": "An academic or social rank/grade (master of arts, doctor, bachelor, etc.)",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "rank_id": "Unique identifier",
+                "rankname": "Name of the rank"
+            }
+        },
+        "PropertyName": {
+            "description": "A named property that can be attached to a factoid (for extensible property-value pairs)",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "propertynameid": "Unique identifier",
+                "propertynamelabel": "Label of the property"
+            },
+            "_populated": false
+        },
+        "Impact": {
+            "description": "The impact/consequence of a factoid",
+            "attributes": {
+                "impact_type": "Type of impact",
+                "certainty": "Certainty of the impact",
+                "quantity": "Quantitative measure if applicable"
+            },
+            "_populated": false
+        },
+        "Object": {
+            "description": "An object associated with a factoid (work, document, artifact, etc.)",
+            "cidoc": "E73_Information_Object",
+            "attributes": {
+                "object_id": "Unique identifier",
+                "object_description": "Description of the object",
+                "value": "Value or title"
+            }
+        },
+        "ObjectType": {
+            "description": "Type/category of object (literary work, legal document, sermon, etc.)",
+            "cidoc": "E55_Type",
+            "attributes": {
+                "type_id": "Unique identifier",
+                "type_description": "Description of the object type"
+            }
+        },
+        "Time": {
+            "description": "Abstract temporal entity",
+            "cidoc": "E52_Time-Span",
+            "attributes": {
+                "time_id": "Unique identifier",
+                "granularity": "Temporal granularity (day, month, year, century)"
+            },
+            "subtypes": {
+                "Instant": {
+                    "description": "A single point in time",
+                    "attributes": {
+                        "instant_id": "Unique identifier"
+                    }
+                },
+                "TimeInterval": {
+                    "description": "A time span with begin and finish",
+                    "attributes": {
+                        "interval_id": "Unique identifier",
+                        "begin": "Start date",
+                        "finish": "End date"
+                    }
+                },
+                "CompositeTime": {
+                    "description": "A composite temporal entity",
+                    "attributes": {
+                        "comp_time_id": "Unique identifier"
+                    },
+                    "subtypes": {
+                        "MultiInterval": {
+                            "description": "Multiple disjoint intervals",
+                            "attributes": {
+                                "multi_interv_id": "Unique identifier"
+                            }
+                        },
+                        "MultiInstant": {
+                            "description": "Multiple instants",
+                            "attributes": {
+                                "multi_inst_id": "Unique identifier"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "relations": {
+        "Named": {
+            "domain": "Person",
+            "range": "Name",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A person has this name form (variant)"
+        },
+        "MainName": {
+            "domain": "Person",
+            "range": "Name",
+            "cardinality": "0,1 - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "The primary/preferred name of a person"
+        },
+        "PersonGroup": {
+            "domain": "Person",
+            "range": "GroupP",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A person belongs to a group"
+        },
+        "ComposedOf": {
+            "domain": "Person",
+            "range": "Person",
+            "cardinality": "0,n - 0,n",
+            "description": "A moral entity is composed of persons"
+        },
+        "ConnectedTo": {
+            "domain": "Person",
+            "range": "Person",
+            "cardinality": "0,n - 0,n",
+            "attributes": {
+                "kinship": "Type of kinship/connection",
+                "certainty": "Degree of certainty"
+            },
+            "description": "Interpersonal connection (family, colleague, etc.)"
+        },
+        "BelongsTo": {
+            "domain": "Person",
+            "range": "Source",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A person is documented in a source"
+        },
+        "IssuedBy": {
+            "domain": "Source",
+            "range": "Person",
+            "cardinality": "0,n - 0,n",
+            "description": "A source was issued/authored by a person"
+        },
+        "AttachedTo": {
+            "domain": "Source",
+            "range": "SourceType",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A source is of a given type"
+        },
+        "Published": {
+            "domain": "Source",
+            "range": "Edition",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A source has been published in an edition"
+        },
+        "IsPartOf": {
+            "domain": "Source",
+            "range": "Source",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A source is part of another source (e.g. chapter in a book)"
+        },
+        "LinkedTo": {
+            "domain": "Source",
+            "range": "Source",
+            "cardinality": "0,n - 0,n",
+            "attributes": {
+                "link_type": "Type of link between sources",
+                "certainty": "Degree of certainty"
+            },
+            "description": "Two sources are related"
+        },
+        "ReferTo": {
+            "domain": "Source",
+            "range": "Factoid",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A source attests/documents a factoid"
+        },
+        "HasType": {
+            "domain": "Factoid",
+            "range": "FactoidType",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid is classified under a type"
+        },
+        "HasProperty": {
+            "domain": "Factoid",
+            "range": "PropertyName",
+            "cardinality": "1,1 - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid has a named property"
+        },
+        "Participate": {
+            "domain": "Factoid",
+            "range": "Person",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A person participates in/is the subject of a factoid. Qualified by Role and Rank.",
+            "qualifiers": {
+                "HasRole": {
+                    "range": "Role",
+                    "description": "The role of the person in this participation"
+                },
+                "HasRank": {
+                    "range": "Rank",
+                    "description": "The rank/grade of the person in this participation"
+                }
+            }
+        },
+        "TookPlaceAt": {
+            "domain": "Factoid",
+            "range": "Place",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid occurred at a specific place"
+        },
+        "AtGroup": {
+            "domain": "Factoid",
+            "range": "GroupP",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid involves a group/institution (extension of DAPHNE model for institutional context)"
+        },
+        "OccurredAt": {
+            "domain": "Factoid",
+            "range": "Time",
+            "cardinality": "0,n - 0,n",
+            "attributes": {
+                "certainty": "Degree of certainty",
+                "datingtype": "Type of dating (exact, approximate, terminus ante/post quem)"
+            },
+            "description": "A factoid is temporally situated"
+        },
+        "FactoidImpact": {
+            "domain": "Factoid",
+            "range": "Impact",
+            "cardinality": "0,n",
+            "description": "A factoid has an impact/consequence"
+        },
+        "OfType": {
+            "domain": "Factoid",
+            "range": "Object",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid concerns an object (e.g. a work)"
+        },
+        "Includes": {
+            "domain": "Factoid",
+            "range": "Object",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid includes/involves an object"
+        },
+        "Correspond": {
+            "domain": "Object",
+            "range": "Object",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "Two objects correspond (e.g. same work in different editions)"
+        },
+        "HasObjectType": {
+            "domain": "Object",
+            "range": "ObjectType",
+            "description": "An object is classified under a type"
+        },
+        "IsLocated": {
+            "domain": "Place",
+            "range": "Zone",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A place is located within a zone"
+        },
+        "ZonePartOf": {
+            "domain": "Zone",
+            "range": "Zone",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A zone is part of a larger zone (hierarchical)"
+        },
+        "DomainPartOf": {
+            "domain": "Domain",
+            "range": "Domain",
+            "cardinality": "0,n - 0,n",
+            "description": "A domain is a sub-domain of another (hierarchical)"
+        },
+        "Precedes": {
+            "domain": "FactoidType",
+            "range": "FactoidType",
+            "cardinality": "0,n - 0,n",
+            "description": "A factoid type typically precedes another in biographical sequence"
+        },
+        "IsTypeOf": {
+            "domain": "FactoidType",
+            "range": "FactoidType",
+            "cardinality": "0,n - 0,n",
+            "attributes": {"certainty": "Degree of certainty"},
+            "description": "A factoid type is a sub-type of another (hierarchical)"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+# Environnement
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CSV générés (reproductibles via le script)
+neo4j_schemaDAPHNE/import_csv/
+
+# Notes internes
+neo4j_schemaDAPHNE/NOTES_ameliorations.txt
+
+# Résultats d'extraction LLM (volumineux)
+extraction_results/

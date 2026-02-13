@@ -1,0 +1,13 @@
+# Disciplines académiques (ne doivent pas devenir des nœuds Institution)
+# Une entrée par ligne (insensible à la casse et aux accents).
+# Les lignes commençant par # sont ignorées.
+# Ajouter de nouvelles entrées si besoin — aucune modification du code nécessaire.
+théologie
+décret
+décrétales
+arts
+médecine
+droit
+droit canon
+droit civil
+sentences

@@ -1,0 +1,21 @@
+# Nations de l'université de Paris (subdivisions administratives)
+# Une entrée par ligne (insensible à la casse et aux accents).
+# Les lignes commençant par # sont ignorées.
+# Ajouter de nouvelles entrées si besoin — aucune modification du code nécessaire.
+france
+française
+picardie
+picarde
+normandie
+normande
+angleterre
+anglaise
+anglo-allemande
+anglo-germanique
+nation allemande
+nation anglaise
+nation française
+nation normande
+nation picarde
+allemagne
+germanique
