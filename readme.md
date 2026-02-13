@@ -22,7 +22,6 @@ neo4j_schemaDAPHNE/          Pipeline de mapping DAPHNE (sans LLM)
   daphne_direct_mapping.py     Script principal
   daphne_lib/                  Modules (extraction, export CSV, chargement Neo4j)
   daphne_ontology_schema.json  Schéma complet de l'ontologie DAPHNE
-  NOTES_ameliorations.txt      Bilan de ce qui est fait / reste à faire
 
 uncertainty_benchmark/        Benchmark pour l'extraction d'incertitude
   uncertainty_examples.txt     59 exemples annotés (50 incertains, 9 certains)
